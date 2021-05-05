@@ -1,23 +1,50 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-  getWeather();
-  getWord();
-  getNumberTrivia();
+  getWeather().then(showWeather);
+
+  let currentTime = Math.round(new Date().getTime() / 1000);;
+
+  // update word of the day every 12 hours
+  if(currentTime - localStorage.getItem("wordTime") >= 12 * 60 * 60){
+    getWord()
+      .then(wordJson => {
+        localStorage.setItem("wordOfTheDay", wordJson[0].meta.id);
+        localStorage.setItem("wordType", wordJson[0].fl);
+        localStorage.setItem("wordDefinitions", JSON.stringify(wordJson[0].shortdef));
+        showWord();
+      })
+      .then(() => localStorage.setItem("wordTime", currentTime));
+  }
+  else{
+    showWord();
+  }
+
+  // update number trivia every 24 hours
+  if(currentTime - localStorage.getItem("numberTriviaTime") >= 24 * 60 * 60){
+    getNumberTrivia()
+      .then((numberTriviaText) => {
+        localStorage.setItem("numberTriviaText", numberTriviaText);
+        showNumberTrivia();
+      })
+      .then(() => localStorage.setItem("numberTriviaTime", currentTime));
+  }
+  else{
+    showNumberTrivia();
+  }
 });
 
 
-function getWeather(){
+async function getWeather(){
   // get location based on IP address
-  fetch("http://ipinfo.io/json")
+  return fetch("http://ipinfo.io/json")
     .then(response => response.json())
     .then(result => {
       let location = `${result.city},${result.country}`;
       // get current weather for this location
       return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${WEATHER_KEY}`);
     })
-    .then(response => response.json())
-    .then(showWeather);
+    .then(response => response.json());
 }
 
 function showWeather(weatherJson){
@@ -33,9 +60,9 @@ function showWeather(weatherJson){
 }
 
 
-function getWord(){
+async function getWord(){
   // get the word of the day
-  fetch("http://api.allorigins.win/get?url=https://www.merriam-webster.com/word-of-the-day")
+  return fetch("http://api.allorigins.win/get?url=https://www.merriam-webster.com/word-of-the-day")
     .then(response => response.text())
     .then((result) => {
       let parser = new DOMParser();
@@ -45,15 +72,14 @@ function getWord(){
       // get the definition for the word of the day
       return fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${WORD_KEY}`);
     })
-    .then(response => response.json())
-    .then(showWord);
+    .then(response => response.json());
 }
 
-function showWord(wordJson){
-  document.getElementById("wordOfTheDay").innerText = wordJson[0].meta.id;
-  document.getElementById("wordType").innerText = wordJson[0].fl;
+function showWord(){
+  document.getElementById("wordOfTheDay").innerText = localStorage.getItem("wordOfTheDay");
+  document.getElementById("wordType").innerText = localStorage.getItem("wordType");
 
-  let definitions = wordJson[0].shortdef;
+  let definitions = JSON.parse(localStorage.getItem("wordDefinitions"));
   document.getElementById("wordDefinition").innerText = "";
   for(let i in definitions){
     document.getElementById("wordDefinition").innerText += "\u2022 " + definitions[i];
@@ -64,14 +90,13 @@ function showWord(wordJson){
 }
 
 
-function getNumberTrivia(){
-  fetch("http://numbersapi.com/random/trivia")
-    .then(response => response.text())
-    .then(showNumberTrivia);
+async function getNumberTrivia(){
+  return fetch("http://numbersapi.com/random/trivia")
+    .then(response => response.text());
 }
 
-function showNumberTrivia(numberTriviaText){
-  document.getElementById("numberTrivia").innerText = numberTriviaText;
+function showNumberTrivia(){
+  document.getElementById("numberTrivia").innerText = localStorage.getItem("numberTriviaText");
 }
 
 
