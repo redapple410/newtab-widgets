@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card {
+    @apply p-4 border-2 border-gray-500 rounded-md;
+  }
+  .text-normal {
+    @apply font-sans font-normal text-base leading-normal text-black;
+  }
+  .text-big {
+    @apply font-serif font-bold text-4xl leading-normal text-black;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-blue {
+    background-color: #a2e9ff;
+    background-image: linear-gradient(135deg, #a2e9ff 0%, #d0fff4 50%, #a2e9ff 100%);
+  }
+}

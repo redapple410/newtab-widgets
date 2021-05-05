@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="./assets/css/tailwind.css" rel="stylesheet">
+  <script src="./assets/js/script.js"></script>
+</head>
+<body class="h-screen w-full bg-gradient-blue">
+  <!-- todo: justify-start md:justify-center shenanigans, or maybe make it not centered? -->
+  <div class="h-full overflow-auto flex flex-col justify-center items-center">
+    <div class="flex flex-col flex-wrap justify-center items-center p-4 space-y-6">
+      <div class="flex flex-row justify-center items-center space-x-6">
+        <div class="card flex flex-row justify-center items-center space-x-4">
+          <img src="http://openweathermap.org/img/wn/02d@2x.png">
+          <div>
+            <p class="text-normal">City</p>
+            <p class="text-big">Temp</p>
+            <p class="text-normal">Feels like</p>
+            <p class="text-normal">Description</p>
+            <p class="text-normal">Wind || Sunrise | Sunset</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="flex flex-row justify-start items-baseline space-x-4">
+            <p class="text-big">Word</p>
+            <p class="text-normal font-light italic">Type</p>
+          </div>
+          <p class="text-normal">Definition</p>
+        </div>
+      </div>
+      <div class="card">
+        <p class="text-normal">Number Fact</p>
+      </div>
+    </div>
+  </div>
+  <!-- todo: invisible md:visible shenanigans -->
+  <img src="./assets/img/kaguya.png" class="absolute -z-10 h-96 w-auto bottom-6 right-6">
+</body>
+</html>
