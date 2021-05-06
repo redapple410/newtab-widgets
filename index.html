@@ -11,7 +11,7 @@
   </head>
   <body class="h-screen w-full bg-gradient-blue">
     <div class="h-full overflow-auto flex flex-col justify-center small:justify-start items-center">
-      <div class="max-w-4xl flex flex-col flex-wrap justify-center items-stretch p-4 space-y-6">
+      <div class="max-w-4xl min-w-11/20 flex flex-col flex-wrap justify-center items-stretch p-4 pb-32 small:pb-4 space-y-6">
         <div class="flex flex-row thin:flex-col justify-center items-stretch space-x-6 thin:space-x-0 thin:space-y-6">
           <div class="card min-w-9/20 flex flex-row justify-center items-center space-x-4">
             <img id="weatherIcon">
@@ -23,7 +23,7 @@
               <p id="weatherWindAndSun" class="text-normal"></p>
             </div>
           </div>
-          <div class="card">
+          <div class="card flex-grow">
             <div class="flex flex-row justify-start items-baseline space-x-4">
               <p id="wordOfTheDay" class="text-big"></p>
               <p id="wordType" class="text-normal font-light italic"></p>

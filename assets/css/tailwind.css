@@ -13967,6 +13967,10 @@ video {
   min-width: 45%;
 }
 
+.min-w-11\/20 {
+  min-width: 55%;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -45134,6 +45138,10 @@ video {
     min-width: 45%;
   }
 
+  .small\:min-w-11\/20 {
+    min-width: 55%;
+  }
+
   .small\:min-w-full {
     min-width: 100%;
   }
@@ -76126,6 +76134,10 @@ video {
     min-width: 45%;
   }
 
+  .short\:min-w-11\/20 {
+    min-width: 55%;
+  }
+
   .short\:min-w-full {
     min-width: 100%;
   }
@@ -107116,6 +107128,10 @@ video {
 
   .thin\:min-w-9\/20 {
     min-width: 45%;
+  }
+
+  .thin\:min-w-11\/20 {
+    min-width: 55%;
   }
 
   .thin\:min-w-full {

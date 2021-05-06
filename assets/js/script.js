@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentTime = Math.round(new Date().getTime() / 1000);;
 
-  // update word of the day every 12 hours
-  if(currentTime - localStorage.getItem("wordTime") >= 12 * 60 * 60){
+  // update word of the day every 6 hours
+  if(currentTime - localStorage.getItem("wordTime") >= 6 * 60 * 60){
     getWord()
       .then(wordJson => {
         localStorage.setItem("wordOfTheDay", wordJson[0].meta.id);

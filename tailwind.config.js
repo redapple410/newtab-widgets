@@ -20,9 +20,10 @@ module.exports = {
       "6xl": "4rem",
     },
     minWidth: {
-      '0': '0',
-      '9/20': '45%',
-      'full': '100%',
+      "0": "0",
+      "9/20": "45%",
+      "11/20": "55%",
+      "full": "100%",
     },
     screens: {
       // since the page is primarly intended for desktop viewing, we are taking a desktop-first approach
