@@ -10,7 +10,7 @@
     @apply font-sans font-normal text-base leading-normal text-black;
   }
   .text-big {
-    @apply font-serif font-bold text-4xl leading-normal text-black;
+    @apply font-serif font-semibold text-4xl leading-normal text-black;
   }
 }
 
