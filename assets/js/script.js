@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if(currentTime - localStorage.getItem("wordTime") >= 6 * 60 * 60){
     getWord()
       .then(wordJson => {
-        localStorage.setItem("wordOfTheDay", wordJson[0].meta.id);
+        localStorage.setItem("wordOfTheDay", wordJson[0].meta.id.split(":")[0]);
         localStorage.setItem("wordType", wordJson[0].fl);
         localStorage.setItem("wordDefinitions", JSON.stringify(wordJson[0].shortdef));
         showWord();
@@ -63,11 +63,11 @@ function showWeather(weatherJson){
 async function getWord(){
   // get the word of the day
   return fetch("http://api.allorigins.win/get?url=https://www.merriam-webster.com/word-of-the-day")
-    .then(response => response.text())
+    .then(response => response.json())
     .then((result) => {
       let parser = new DOMParser();
-      let doc = parser.parseFromString(result, "text/html");
-      let word = doc.querySelector("h1").innerText;
+      let doc = parser.parseFromString(result.contents, "text/html");
+      let word = doc.querySelector("h2.word-header-txt").innerText;
 
       // get the definition for the word of the day
       return fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${WORD_KEY}`);
